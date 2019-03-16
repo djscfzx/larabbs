@@ -23,7 +23,7 @@
         @else
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="https://b-ssl.duitang.com/uploads/item/201510/17/20151017181640_UEy3d.thumb.700_0.jpeg" class="img-responsive img-circle" width="30px" height="30px">
+              <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="30px" height="30px">
               {{ Auth::user()->name }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
