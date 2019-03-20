@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 防止跨域攻击 -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>@yield('title', 'LaraBBS')</title>
-  <meta name="description" content="@yield('description', 'LaraBBS')" />
+  <title>@yield('title', 'LaraBBS') - {{ setting('site_name', 'Laravel 论坛') }}</title>
+  <meta name="description" content="@yield('description', setting('seo_description', 'LaraBBS'))" />
+  <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'LaraBBS,论坛'))" />
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   @yield('styles')
 </head>
