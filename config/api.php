@@ -244,5 +244,4 @@ return [
             'limit'  => env('SIGN_RATE_LIMITS', 10),
         ],
     ],
-
 ];
