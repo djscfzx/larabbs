@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Carbon\Carbon;
-use Laravel\Passport\Passport;
+/*use Carbon\Carbon;
+use Laravel\Passport\Passport;*/
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,15 +16,15 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\User::class  => \App\Policies\UserPolicy::class,
     ];
 
-    /*public function boot() {
+    public function boot() {
         $this->registerPolicies();
 
         \Horizon::auth(function ($request) {
             // 是否是站长
             return \Auth::user()->hasRole('Founder');
         });
-    }*/
-    public function boot()
+    }
+    /*public function boot()
     {
         $this->registerPolicies();
 
@@ -39,5 +39,5 @@ class AuthServiceProvider extends ServiceProvider
             // 是否是站长
             return \Auth::user()->hasRole('Founder');
         });
-    }
+    }*/
 }

@@ -9,16 +9,16 @@ use App\Http\Requests\Api\AuthorizationRequest;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Http\Requests\Api\WeappAuthorizationRequest;
 
-use Zend\Diactoros\Response as Psr7Response;
+/*use Zend\Diactoros\Response as Psr7Response;
 use Psr\Http\Message\ServerRequestInterface;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\AuthorizationServer;
-use App\Traits\PassportToken;
+use App\Traits\PassportToken;*/
 
 class AuthorizationsController extends Controller
 {
-    use PassportToken;
-    /*public function store(AuthorizationRequest $request)
+    //use PassportToken;
+    public function store(AuthorizationRequest $request)
     {
         $username = $request->username;
 
@@ -33,15 +33,15 @@ class AuthorizationsController extends Controller
         }
 
         return $this->respondWithToken($token)->setStatusCode(201);
-    }*/
-    public function store(AuthorizationRequest $originRequest, AuthorizationServer $server, ServerRequestInterface $serverRequest)
+    }
+    /*public function store(AuthorizationRequest $originRequest, AuthorizationServer $server, ServerRequestInterface $serverRequest)
     {
         try {
            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response)->withStatus(201);
         } catch(OAuthServerException $e) {
             return $this->response->errorUnauthorized($e->getMessage());
         }
-    }
+    }*/
 
     public function socialStore($type, SocialAuthorizationRequest $request)
     {
@@ -92,10 +92,10 @@ class AuthorizationsController extends Controller
         }
 
         // return $this->response->array(['token' => $user->id]);
-        /*$token = Auth::guard('api')->fromUser($user);
-        return $this->respondWithToken($token)->setStatusCode(201);*/
-        $result = $this->getBearerTokenByUser($user, '1', false);
-        return $this->response->array($result)->setStatusCode(201);
+        $token = Auth::guard('api')->fromUser($user);
+        return $this->respondWithToken($token)->setStatusCode(201);
+        /*$result = $this->getBearerTokenByUser($user, '1', false);
+        return $this->response->array($result)->setStatusCode(201);*/
     }
 
     public function weappStore(WeappAuthorizationRequest $request)
@@ -151,26 +151,26 @@ class AuthorizationsController extends Controller
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
-    /*public function update()
+    public function update()
     {
         $token = Auth::guard('api')->refresh();
         return $this->respondWithToken($token);
-    }*/
-    public function update(AuthorizationServer $server, ServerRequestInterface $serverRequest)
+    }
+    /*public function update(AuthorizationServer $server, ServerRequestInterface $serverRequest)
     {
         try {
            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response);
         } catch(OAuthServerException $e) {
             return $this->response->errorUnauthorized($e->getMessage());
         }
-    }
+    }*/
 
-    /*public function destroy()
+    public function destroy()
     {
         Auth::guard('api')->logout();
         return $this->response->noContent();
-    }*/
-    public function destroy()
+    }
+    /*public function destroy()
     {
         if (!empty($this->user())) {
             $this->user()->token()->revoke();
@@ -178,7 +178,7 @@ class AuthorizationsController extends Controller
         } else {
             return $this->response->errorUnauthorized('The token is invalid.');
         }
-    }
+    }*/
 
     protected function respondWithToken($token)
     {
