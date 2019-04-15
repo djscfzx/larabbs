@@ -14,7 +14,8 @@ class UserRequest extends FormRequest
                     'verification_key' => 'required|string',
                     'verification_code' => 'required|string',
                 ];
-                break;
+            break;
+            case 'PUT':
             case 'PATCH':
                 $userId = \Auth::guard('api')->id();
                 return [
@@ -23,7 +24,7 @@ class UserRequest extends FormRequest
                     'introduction' => 'max:80',
                     'avatar_image_id' => 'exists:images,id,type,avatar,user_id,'.$userId,
                 ];
-                break;
+            break;
         }
     }
 
